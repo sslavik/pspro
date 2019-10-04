@@ -1,0 +1,13 @@
+# Achivos
+*.xml
+*.mf
+*.class
+*.properties
+*.lts
+*.jar
+# Directorios
+/nbproject/private/
+/build/
+/dist/
+/nbproject/private/
+
