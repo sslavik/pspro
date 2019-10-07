@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pruebas.proccesbuilder;
+package pruebas.processbuilder;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author hacka
  */
-public class PruebasProccesBuilder {
+public class PruebasProcessBuilder {
 
     /**
      * @param args the command line arguments
