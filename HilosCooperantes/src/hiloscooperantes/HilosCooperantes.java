@@ -41,9 +41,7 @@ class HilosCooperantes {
             th.start();
         }
         try {
-            while(cuenta != CUENTA_TOTAL){
                 Thread.sleep(ESPERA_MS);
-            }
         } catch (InterruptedException ex) {
             System.err.println("Se interrumpió hilo principal.");
             ex.printStackTrace();
