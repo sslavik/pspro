@@ -6,6 +6,7 @@
 package pruebas.processbuilder;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -33,41 +34,39 @@ public class PruebasProcessBuilder {
         try{
             comandos.addAll(Arrays.asList(args));
             
+            
             ProcessBuilder pb = new ProcessBuilder(comandos);
-            ProcessBuilder pb2 = new ProcessBuilder("ls /home");
             
-            List<ProcessBuilder> lista = new ArrayList();
             
-            List<Process> p = ProcessBuilder.startPipeline(lista);
+            Process p = pb.start();
             
             
             
             // Process isAlive??
-            System.out.println("Is Alive : " + p.get(0).isAlive());
+            System.out.println("Is Alive : " + p.isAlive());
             
-            BufferedReader reader = new BufferedReader(new InputStreamReader(p.get(0).getInputStream()));
-            BufferedReader errorR = new BufferedReader(new InputStreamReader(p.get(0).getErrorStream()));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
             
             String linea;
             
             // Preguntamos la información del proceso
             System.out.println("Process Info : ");
-                System.out.println(p.get(0).info());
-            System.out.println("Process PID : "+p.get(0).pid());
+                System.out.println(p.info());
+            System.out.println("Process PID : "+p.pid());
 
             
             while((linea = reader.readLine()) != null){
                 System.out.println(linea);
             }
-            while((linea = errorR.readLine()) != null){
-                System.out.println(linea);
-            }
+            
+            pb.directory(new File("/home/usuario/Escritorio"));
+            
             // Where is the Directory ?
             System.out.println("Directory  : " + pb.directory());
             
             // Process Finished?
-            p.get(0).waitFor();
-            System.out.println("Is Alive : " + p.get(0).isAlive());
+            p.waitFor();
+            System.out.println("Is Alive : " + p.isAlive());
             
         }
         catch (IOException x){
