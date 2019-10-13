@@ -5,13 +5,19 @@
  */
 package primosconhilos;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 class Hilo implements Runnable{
     
     int desde;
     int hasta;
-    List<Integer> primos = null;
+    List<Integer> primos = new ArrayList<Integer>();
     
     public Hilo(int desde, int hasta){
         this.desde = desde;
@@ -21,17 +27,20 @@ class Hilo implements Runnable{
     @Override
     public void run(){
         
+        
+        
         for (int i = desde; i < hasta - 1; i++) {
             boolean esPrimo = true;
             for (int j = 2; j < i; j++) {
-                if(i == 1) continue;
-                if((i % j) == 0){
-                    esPrimo = false;
-                }
+                if(i == 1 || i == 0) esPrimo = false;
+                if((i % j) == 0) esPrimo = false;
             }
             if(i == 2) primos.add(i);
             else if(esPrimo) primos.add(i);
         }
+        
+        System.out.print(primos);
+        
     }
 }
 
@@ -40,35 +49,32 @@ class Hilo implements Runnable{
  * @author usuario
  */
 public class PrimosConHilos {
-
     
     /**
      * @param args the command line arguments
+     * @throws java.lang.InterruptedException
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         // TODO code application logic here
-        List<Integer> totalPrimos = null;
+
         int hastaPrimo = 100000;
         final int NUM_HILOS = 10;
         int desde = 0;
         int hasta = hastaPrimo / 10;
         
+        System.out.print("Primos : ");
+
         for (int i = 0; i < NUM_HILOS; i++) {
-            Hilo h = new Hilo(desde, hasta * i);
+            Hilo h = new Hilo(desde, hasta * (i + 1));
             Thread th = new Thread(h);
             th.start();
             desde = desde + hasta;
-            for(int j: h.primos){
-                totalPrimos.add(j);
-            }
+            
         }
         
-        System.out.print("Primos : ");
-        for (int primo: totalPrimos){
-            System.out.print(" " + primo);
-        }
         
+
         
     }
-    
+       
 }
