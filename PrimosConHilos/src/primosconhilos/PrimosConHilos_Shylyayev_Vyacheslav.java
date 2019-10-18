@@ -13,7 +13,6 @@ class Hilo implements Runnable {
 
     int desde;
     int hasta;
-    List<Integer> primos = new ArrayList<Integer>();
 
     public Hilo(int desde, int hasta) {
         this.desde = desde;
@@ -22,7 +21,7 @@ class Hilo implements Runnable {
 
     @Override
     public void run() {
-
+        
         for (int i = desde; i < hasta - 1; i++) {
             boolean esPrimo = true;
             for (int j = 2; j < i; j++) {
@@ -32,35 +31,26 @@ class Hilo implements Runnable {
                     esPrimo = false;
                 }
             }
-            if (i == 2) {
-                PrimosConHilos.primos.add(i);
-            } else if (esPrimo) {
-                PrimosConHilos.primos.add(i);
+            // Sincronizamos la Lista
+            synchronized (PrimosConHilos_Shylyayev_Vyacheslav.primos) {
+                if (i == 2) {
+                    PrimosConHilos_Shylyayev_Vyacheslav.primos.add(i);
+                } else if (esPrimo) {
+                    PrimosConHilos_Shylyayev_Vyacheslav.primos.add(i);
+                }
             }
         }
-        /*
-        for (int i = desde; i < hasta - 1; i++) {
-            boolean esPrimo = true;
-            for (int j = 2; j < i; j++) {
-                if(i == 1 || i == 0) esPrimo = false;
-                else if((i % j) == 0) esPrimo = false;
-            }
-            if(i == 2) PrimosConHilos.add(i);
-            else if(esPrimo) PrimosConHilos.add(i);
-        }*/
 
     }
 }
 
 /**
  *
- * @author usuario
+ * @author Vyacheslav Shylyayev
  */
-public class PrimosConHilos {
+public class PrimosConHilos_Shylyayev_Vyacheslav {
 
-    public static List<Integer> primos = new ArrayList<Integer>();
-    public static Boolean[] primosB = new Boolean[100000];
-    static int nDatos = 0;
+    public static List<Integer> primos = Collections.synchronizedList(new ArrayList<Integer>());
 
     /**
      * @param args the command line arguments
@@ -90,15 +80,9 @@ public class PrimosConHilos {
         }
         
         
-
+         // Se imprimen los primos
         System.out.println(primos);
         System.out.println(primos.size());
 
     }
-
-    static void add(int i) {
-
-        primosB[i] = true;
-    }
-
 }
