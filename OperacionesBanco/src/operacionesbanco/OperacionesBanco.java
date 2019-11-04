@@ -45,9 +45,9 @@ public class OperacionesBanco {
     
     static boolean transferir(Cuenta C1, Cuenta C2, int cantidad){
         
-        Cuenta primeraCuenta;
-        Cuenta segundaCuenta;
-        
+        Cuenta primeraCuenta = C1;
+        Cuenta segundaCuenta = C2;
+        /*
         if(C1.id < C2.id)
         {
             primeraCuenta = C1;
@@ -58,7 +58,7 @@ public class OperacionesBanco {
             primeraCuenta = C2;
             segundaCuenta = C1;
         }
-        
+        */
         synchronized(primeraCuenta){
             synchronized(segundaCuenta){
                 if(C1.getSaldo()>= cantidad){        
