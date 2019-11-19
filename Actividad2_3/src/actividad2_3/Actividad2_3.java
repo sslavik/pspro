@@ -7,7 +7,7 @@ package actividad2_3;
 
 /**
  *
- * @author usuario
+ * @author Vyacheslav Shylyayev
  */
 public class Actividad2_3 {
 
