@@ -34,7 +34,7 @@ public class Actividad33 {
             for (int j = 1; j < 255; j++) {
                 String ip = preIP+i+"."+j;
                 InetAddress ia = InetAddress.getByName(preIP+i+"."+j);
-                if(ia.isReachable(0)) // NO COMPRUEBA SI LA IP ES ALCANZABLE
+                if(ia.isReachable(50)) // NO COMPRUEBA SI LA IP ES ALCANZABLE
                     System.out.println(ip);
             }
         }
