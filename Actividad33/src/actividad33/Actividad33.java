@@ -26,18 +26,26 @@ public class Actividad33 {
         
         Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
         
+        final int TIEMPO_ESPERA_RESPUESTA = 50;
+        
         String preIP = "192.168.";
         int minIpHost = 96;
         int maxIpHost = 111;
+        int contadorIps = 0;
         
         for(int i = minIpHost; i <= maxIpHost; i++){
             for (int j = 1; j < 255; j++) {
                 String ip = preIP+i+"."+j;
                 InetAddress ia = InetAddress.getByName(preIP+i+"."+j);
-                if(ia.isReachable(50)) // NO COMPRUEBA SI LA IP ES ALCANZABLE
-                    System.out.println(ip);
+                if(ia.isReachable(TIEMPO_ESPERA_RESPUESTA)) {// Timeout 0. NO COMPRUEBA SI LA IP ES ALCANZABLE, porque no da tiempo
+                    System.out.println("IP ENCONTRADA : " + ip);
+                    contadorIps++;
+                }
             }
         }
+        System.out.println("Se han encontrado : " + contadorIps + " IPs");
+        
+        
         
     }
     
